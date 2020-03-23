@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Job Application Detail</title>
+</head>
+<body>
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="/active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/jobs">Sign in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Job Title</td>
+            <td th:text="${jobDetail.title}">Item code will appear here</td>
+        </tr>
+        <tr>
+            <td>Job Description</td>
+            <td th:text="${jobDetail.description}">Item code will appear here</td>
+        </tr>
+        <tr>
+            <td>Number of People to Hire </td>
+            <td th:text="${jobDetail.peopleToHire}">Item code will appear here</td>
+        </tr>
+        <tr>
+            <td>Last Application Date </td>
+            <td th:text="${jobDetail.lastApplicationDate}">Item code will appear here</td>
+        </tr>
+        </tbody>
+
+    </table>
+    <form th:action="@{/active}" th:object="${applicantForm}" th:method="post">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}" /></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" th:field="*{email}" /></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" th:field="*{phone}" /></td>
+                <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" th:field="*{address}" /></td>
+                <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Thoughts on Job:</td>
+                <td><input type="text" th:field="*{thoughts}" /></td>
+                <td th:if="${#fields.hasErrors('thoughts')}" th:errors="*{thoughts}">There is error here!</td>
+            </tr>
+
+            <tr>
+                <td><button type="submit">Apply</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

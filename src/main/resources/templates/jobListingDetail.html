@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Job Listing Detail</title>
+</head>
+<body>
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/jobs">Job List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/job/add">Job Add</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out" class="btn btn-primary"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Job Detail</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Job Title</td>
+                <td th:text="${jobDetail.title}">Item code will appear here</td>
+            </tr>
+            <tr>
+                <td>Job Description</td>
+                <td th:text="${jobDetail.description}">Item code will appear here</td>
+            </tr>
+            <tr>
+                <td>Number of People To Hire</td>
+                <td th:text="${jobDetail.peopleToHire}">Item code will appear here</td>
+            </tr>
+            <tr>
+                <td>Last Application Date</td>
+                <td th:text="${jobDetail.lastApplicationDate}">Item code will appear here</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Applicants</th>
+        </tr>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Thoughts</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="applicant : ${applicants}">
+                <td th:if="${applicant.job_id == jobDetail.id}" th:text="${applicant.name}"></td>
+                <td th:if="${applicant.job_id == jobDetail.id}" th:text="${applicant.email}"></td>
+                <td th:if="${applicant.job_id == jobDetail.id}" th:text="${applicant.phone}"></td>
+                <td th:if="${applicant.job_id == jobDetail.id}" th:text="${applicant.address}"></td>
+                <td th:if="${applicant.job_id == jobDetail.id}" th:text="${applicant.thoughts}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

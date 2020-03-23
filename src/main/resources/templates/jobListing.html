@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>List of Jobs</title>
+</head>
+<body>
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/jobs">Job List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/job/add">Job Add</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out" class="btn btn-primary"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Job Name</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.title}">Item code will appear here</td>
+                <td>
+                    <form th:action="@{/jobDetail/} + ${job.id}" th:method="post">
+                        <button type="submit" class="btn btn-info">Show Detail</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/job/} + ${job.id}" th:method="delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

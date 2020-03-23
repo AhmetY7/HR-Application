@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Add Job</title>
+</head>
+<body>
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="/jobs">Job List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/job/add">Job Add</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out" class="btn btn-primary"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <form th:action="@{/jobs}" th:object="${jobAddForm}" th:method="post">
+        <table>
+            <tr>
+                <td>Job Title:</td>
+                <td><input type="text" th:field="*{title}" class="form-control"/></td>
+                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Job Descriptioddn:</td>
+                <td><input type="text" th:field="*{description}" class="form-control"/></td>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">There is error here!</td>
+            </tr>
+            <tr>
+                <td>Number of People to Hire:</td>
+                <td><input type="text" th:field="*{peopleToHire}" class="form-control"/></td>
+                <td th:if="${#fields.hasErrors('peopleToHire')}" th:errors="*{peopleToHire}">Wrong number!</td>
+            </tr>
+            <tr>
+                <td>Last Application Date:</td>
+                <td><input type="date" th:field="*{lastApplicationDate}" class="form-control"/></td>
+                <td th:if="${#fields.hasErrors('lastApplicationDate')}" th:errors="*{lastApplicationDate}">Wrong date!</td>
+            </tr>
+            <tr>
+                <td><button type="submit" class="btn btn-primary">Add</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
